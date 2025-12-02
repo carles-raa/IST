@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Editar cuenta</title>
+    </h:head>
+    <h:body>
+        <center>
+            <br/>
+            <h:graphicImage  width="300" value="resources/images/libros.jpg" alt="libros"/>
+            <br/>
+            <h1>Editar datos de cuenta</h1>
+            <br/>
+            <h:outputText rendered="#{not empty sesionMB.errorMessage and sesionMB.errorMessage ne 'noError'}" value="#{sesionMB.errorMessage}" style="color:red;"/>
+            <h:form>
+                <h:panelGrid columns="2" cellspacing="20">
+                    <h:outputText value="Nombre:" />
+                    <h:inputText value="#{sesionMB.nombre}" />
+                    <h:outputText value="Dirección:" />
+                    <h:inputTextarea cols="25" rows="3" value="#{sesionMB.direccion}" />
+                    <h:outputText value="Correo electrónico:" />
+                    <h:inputText value="#{sesionMB.mail}" />
+                    <h:outputText value="Contraseña (opcional):" />
+                    <h:inputSecret value="#{sesionMB.password}" />
+                    <h:outputText value="Repite la contraseña:" />
+                    <h:inputSecret value="#{sesionMB.password2}" />
+                </h:panelGrid>
+                <h:panelGrid columns="3" cellspacing="30">
+                    <h:commandButton value="Guardar" action="#{sesionMB.editaCuenta()}" />
+                    <h:commandButton value="Cancelar" action="inicio" />
+                </h:panelGrid>
+            </h:form>
+            <br/>
+            <i>IST: tienda de libros</i>
+        </center>
+    </h:body>
+</html>

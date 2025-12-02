@@ -22,9 +22,10 @@
                     <br/>   
                     <br/>   
                     <h:commandLink  value="Catálogo"  action="listaTemas"/>                         
-                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>     
-                    <h:commandLink rendered="#{!sesionMB.logged}" value="Login"  action="login"/>       
-                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>                     
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Editar cuenta"  action="#{sesionMB.prepararEdicionCuenta()}"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>
+                    <h:commandLink rendered="#{!sesionMB.logged}" value="Login"  action="login"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>
                 </h:panelGrid>
             </h:form>
             <br/>       

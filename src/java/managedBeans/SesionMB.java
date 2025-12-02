@@ -73,6 +73,34 @@ public class SesionMB implements Serializable {
         }
     }
 
+    public String prepararEdicionCuenta() {
+        if (isLogged()) {
+            nombre = cliente.getNombre();
+            mail = cliente.getMail();
+            direccion = cliente.getDireccion();
+            password = "";
+            password2 = "";
+            errorMessage = "";
+            return paginaAnterior = "editarCuenta";
+        }
+        return "login";
+    }
+
+    public String editaCuenta() {
+        if (!isLogged()) {
+            return "login";
+        }
+        errorMessage = clienteEJB.actualizaCuenta(cliente.getLogin(), nombre, direccion, mail, password, password2);
+        if (errorMessage.equals("noError")) {
+            cliente.setNombre(nombre);
+            cliente.setMail(mail);
+            cliente.setDireccion(direccion);
+            return paginaAnterior = "inicio";
+        } else {
+            return "";
+        }
+    }
+
     public String ponEnCarro() {
         carroCompraEJB.ponEnCarro(libro);
         return paginaAnterior = "carroCompra";
