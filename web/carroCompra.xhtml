@@ -9,18 +9,19 @@
             <br/>
             <h:graphicImage  width="300" value="resources/images/libros.jpg" alt="libros"/>
             <br/>
-            <h1>Tienda de libros</h1>   
-            <h:outputText   rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>      
-            <br/>         
+            <h1>Tienda de libros</h1>
+            <h:outputText   rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>
             <br/>
             <br/>
-            <h2>Carro de la compra:</h2>   
-            <h:form>        
-                <h:dataTable  value="#{sesionMB.carroCompra.librosEnCarro}" cellspacing="30" var="libroEnCarro" >                   
-                    <h:column>   
+            <br/>
+            <h2>Carro de la compra:</h2>
+            <h:form>
+                <h:dataTable  value="#{sesionMB.carroCompra.librosEnCarro}" cellspacing="30" var="libroEnCarro" >
+
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Título"/>
-                        </f:facet>                   
+                        </f:facet>
                         <h:outputText value="#{libroEnCarro.libro.titulo}"/>
                     </h:column>
                     <h:column>
@@ -28,13 +29,13 @@
                             <h:outputText value="Autor"/>
                         </f:facet>
                         <h:outputText value="#{libroEnCarro.libro.autor}"/>
-                    </h:column>           
+                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Precio"/>
                         </f:facet>
                         <h:outputText value="#{libroEnCarro.libro.precio}"/>
-                    </h:column>            
+                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Cantidad"/>
@@ -45,31 +46,31 @@
                         <f:facet name="header">
                             <h:outputText value="SubTotal"/>
                         </f:facet>
-                        <h:outputText value="#{libroEnCarro.subTotal} euros"/>                    
-                    </h:column>            
+                        <h:outputText value="#{libroEnCarro.subTotal} euros"/>
+                    </h:column>
                     <f:facet name="footer">
                         <h:outputText value="Total: #{sesionMB.carroCompra.total} euros"/>
-                    </f:facet>                                   
-                </h:dataTable>                
-                <br/>  
-                <h:commandButton rendered="#{sesionMB.logged}" value="Hacer pedido" action="pedido"/>            
-                <br/>  
-                <br/>  
-                <br/>  
-                <h:commandButton value="Vaciar el carro" action="#{sesionMB.carroCompra.vaciaCarro()}"/>            
-                <br/>   
-                <h:panelGrid columns="5" cellspacing="30">
-                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>                          
-                    <h:commandLink value="Libros de #{sesionMB.tema.nombre}" action="listaLibros"/>    
-                    <h:commandLink  value="Inicio"  action="inicio"/>                
-                    <h:commandLink value="Catalogo" action="listaTemas"/> 
-                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>        
-                    <h:commandLink rendered="#{!sesionMB.logged}" value="Login"  action="login"/>     
-                </h:panelGrid> 
-            </h:form>            
+                    </f:facet>
+                </h:dataTable>
+                <br/>
+                <h:commandButton rendered="#{sesionMB.logged}" value="Hacer pedido" action="pedido"/>
+                <br/>
+                <br/>
+                <br/>
+                <h:commandButton value="Vaciar el carro" action="#{sesionMB.carroCompra.vaciaCarro()}"/>
+                <br/>
+                <h:panelGrid columns="7" cellspacing="30">
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Editar cuenta"  action="#{sesionMB.irEditarCuenta()}"/>
+                    <h:commandLink value="Libros de #{sesionMB.tema.nombre}" action="listaLibros"/>
+                    <h:commandLink  value="Inicio"  action="inicio"/>
+                    <h:commandLink value="Catalogo" action="listaTemas"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>
+                    <h:commandLink rendered="#{!sesionMB.logged}" value="Login"  action="login"/>
+                </h:panelGrid>
+            </h:form>
             <br/>
             <i>IST: tienda de libros</i>
         </center>
     </h:body>
 </html>
-

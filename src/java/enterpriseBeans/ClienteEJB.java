@@ -76,4 +76,32 @@ public class ClienteEJB {
             }
         }
     }
+
+    public String actualizaCuenta(Cliente cliente, String nombre, String direccion, String mail, String password, String password2) {
+        if (nombre.isEmpty()) {
+            return "El nombre no puede estar en blanco";
+        } else if (direccion.isEmpty()) {
+            return "La dirección no puede estar en blanco";
+        } else if (mail.isEmpty()) {
+            return "La dirección de correo no puede estar en blanco";
+        }
+        try {
+            cliente.setNombre(nombre);
+            cliente.setDireccion(direccion);
+            cliente.setMail(mail);
+            if ((!password.isEmpty()) || (!password2.isEmpty())) {
+                if (!password.equals(password2)) {
+                    return "Las dos contraseñas introducidas no coinciden";
+                }
+                MessageDigest digest = MessageDigest.getInstance("SHA-512");
+                digest.reset();
+                digest.update(password.getBytes("utf8"));
+                cliente.setPwd(String.format("%0128x", new BigInteger(1, digest.digest())));
+            }
+            em.merge(cliente);
+            return "noError";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 }

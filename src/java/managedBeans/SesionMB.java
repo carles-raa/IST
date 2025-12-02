@@ -88,6 +88,27 @@ public class SesionMB implements Serializable {
         return paginaAnterior = "listaPedidos";
     }
 
+    public String irEditarCuenta() {
+        if (!isLogged()) {
+            return "login";
+        }
+        nombre = getNombre();
+        direccion = getDireccion();
+        mail = getMail();
+        password = "";
+        password2 = "";
+        errorMessage = "";
+        return paginaAnterior = "editarCuenta";
+    }
+
+    public String actualizaCuenta() {
+        errorMessage = clienteEJB.actualizaCuenta(cliente, nombre, direccion, mail, password, password2);
+        if (errorMessage.equals("noError")) {
+            return paginaAnterior = "inicio";
+        }
+        return "";
+    }
+
     public String getErrorMessage() {
         return errorMessage;
     }
