@@ -14,8 +14,9 @@
             <br/>
             <br/>
             <h:form>
-                <h:panelGrid columns="2" cellspacing="10">
-                    <h:inputText value="#{sesionMB.terminoBusqueda}"/>
+                <h:panelGrid columns="3" cellspacing="10">
+                    <h:outputText value="Buscar libro:"/>
+                    <h:inputText value="#{sesionMB.terminoBusqueda}" size="40"/>
                     <h:commandButton value="Buscar" action="#{sesionMB.buscarLibros()}"/>
                 </h:panelGrid>
             </h:form>

@@ -15,8 +15,9 @@
             <br/>
             <h:panelGroup>
                 <h:form>
-                    <h:panelGrid columns="3" cellspacing="10">
-                        <h:inputText value="#{sesionMB.terminoBusqueda}" required="true" requiredMessage="Introduce un término de búsqueda"/>
+                    <h:panelGrid columns="4" cellspacing="10">
+                        <h:outputText value="Buscar libro:"/>
+                        <h:inputText value="#{sesionMB.terminoBusqueda}" size="40" required="true" requiredMessage="Introduce un término de búsqueda"/>
                         <h:commandButton value="Buscar" action="#{sesionMB.buscarLibros()}"/>
                         <h:commandLink value="Limpiar" action="buscarLibros" />
                     </h:panelGrid>
