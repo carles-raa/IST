@@ -36,6 +36,8 @@ public class SesionMB implements Serializable {
     private CatalogoEJB catalogoEJB;
     private Tema tema;
     private Libro libro;
+    private String terminoBusqueda;
+    private List<Libro> resultadosBusqueda;
     @EJB
     private CarroCompraEJB carroCompraEJB;
     private String loginTime;
@@ -127,6 +129,11 @@ public class SesionMB implements Serializable {
         return paginaAnterior = "detallesLibro";
     }
 
+    public String buscarLibros() {
+        resultadosBusqueda = catalogoEJB.buscarLibros(terminoBusqueda);
+        return paginaAnterior = "buscarLibros";
+    }
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -213,5 +220,17 @@ public class SesionMB implements Serializable {
 
     public CarroCompraEJB getCarroCompra() {
         return carroCompraEJB;
+    }
+
+    public String getTerminoBusqueda() {
+        return terminoBusqueda;
+    }
+
+    public void setTerminoBusqueda(String terminoBusqueda) {
+        this.terminoBusqueda = terminoBusqueda;
+    }
+
+    public List<Libro> getResultadosBusqueda() {
+        return resultadosBusqueda;
     }
 }

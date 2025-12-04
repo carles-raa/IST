@@ -13,6 +13,13 @@
             <h:outputText   rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>
             <br/>
             <br/>
+            <h:form>
+                <h:panelGrid columns="2" cellspacing="10">
+                    <h:inputText value="#{sesionMB.terminoBusqueda}"/>
+                    <h:commandButton value="Buscar" action="#{sesionMB.buscarLibros()}"/>
+                </h:panelGrid>
+            </h:form>
+            <br/>
             <h2>Editar cuenta</h2>
             <h:panelGroup rendered="#{sesionMB.errorMessage ne null and sesionMB.errorMessage ne ''}">
                 <h3>#{sesionMB.errorMessage}</h3>

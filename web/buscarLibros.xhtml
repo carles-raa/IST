@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Buscar libros</title>
+    </h:head>
+    <h:body>
+        <center>
+            <br/>
+            <h:graphicImage  width="300" value="resources/images/libros.jpg" alt="libros"/>
+            <br/>
+            <h1>Tienda de libros</h1>
+            <h:outputText   rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>
+            <br/>
+            <br/>
+            <h:panelGroup>
+                <h:form>
+                    <h:panelGrid columns="3" cellspacing="10">
+                        <h:inputText value="#{sesionMB.terminoBusqueda}" required="true" requiredMessage="Introduce un término de búsqueda"/>
+                        <h:commandButton value="Buscar" action="#{sesionMB.buscarLibros()}"/>
+                        <h:commandLink value="Limpiar" action="buscarLibros" />
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGroup>
+            <br/>
+            <h:form>
+                <h:panelGroup rendered="#{empty sesionMB.resultadosBusqueda}">
+                    <h:outputText value="No se han encontrado libros para la búsqueda." />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{not empty sesionMB.resultadosBusqueda}">
+                    <h2>Resultados para "#{sesionMB.terminoBusqueda}":</h2>
+                    <h:dataTable value="#{sesionMB.resultadosBusqueda}" cellspacing="30" var="libro">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Título"/>
+                            </f:facet>
+                            <h:commandLink  value="#{libro.titulo}"  action="#{sesionMB.verLibro(libro)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Autor"/>
+                            </f:facet>
+                            <h:outputText value="#{libro.autor}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Editorial"/>
+                            </f:facet>
+                            <h:outputText value="#{libro.editorial}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio"/>
+                            </f:facet>
+                            <h:outputText value="#{libro.precio}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br/>
+                <h:panelGrid columns="3" cellspacing="30">
+                    <h:graphicImage  width="100" value="resources/images/carrito.jpg" alt="carrito"/>
+                    <h:outputText   value="(#{sesionMB.carroCompra.numLibrosEnCarro} articulos)"  />
+                    <h:commandLink   rendered="#{!sesionMB.carroCompra.vacio}" value="Ver"  action="carroCompra"/>
+                </h:panelGrid>
+                <h:panelGrid columns="6" cellspacing="30">
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Editar cuenta"  action="#{sesionMB.irEditarCuenta()}"/>
+                    <h:commandLink value="Catalogo" action="listaTemas"/>
+                    <h:commandLink value="Inicio"  action="inicio"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>
+                    <h:commandLink rendered="#{!sesionMB.logged}" value="Login"  action="login"/>
+                </h:panelGrid>
+            </h:form>
+            <br/>
+            <i>IST: tienda de libros</i>
+        </center>
+    </h:body>
+</html>
