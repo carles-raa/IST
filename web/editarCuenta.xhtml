@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Editar cuenta</title>
+    </h:head>
+    <h:body>
+        <center>
+            <br/>
+            <h:graphicImage  width="300" value="resources/images/libros.jpg" alt="libros"/>
+            <br/>
+            <h1>Tienda de libros</h1>
+            <h:outputText   rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>
+            <br/>
+            <br/>
+            <h:form>
+                <h:panelGrid columns="3" cellspacing="10">
+                    <h:outputText value="Buscar libro:"/>
+                    <h:inputText value="#{sesionMB.terminoBusqueda}" size="40"/>
+                    <h:commandButton value="Buscar" action="#{sesionMB.buscarLibros()}"/>
+                </h:panelGrid>
+            </h:form>
+            <br/>
+            <h2>Editar cuenta</h2>
+            <h:panelGroup rendered="#{sesionMB.errorMessage ne null and sesionMB.errorMessage ne ''}">
+                <h3>#{sesionMB.errorMessage}</h3>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2" cellspacing="20">
+                    <h:outputText value="Nombre:" />
+                    <h:inputText value="#{sesionMB.nombre}" maxlength="30" size="30"/>
+                    <h:outputText value="Dirección:" />
+                    <h:inputText value="#{sesionMB.direccion}" maxlength="30" size="30"/>
+                    <h:outputText value="Mail:" />
+                    <h:inputText value="#{sesionMB.mail}" maxlength="30" size="30"/>
+                    <h:outputText value="Nueva contraseña:" />
+                    <h:inputSecret value="#{sesionMB.password}" maxlength="30" size="30"/>
+                    <h:outputText value="Repite contraseña:" />
+                    <h:inputSecret value="#{sesionMB.password2}" maxlength="30" size="30"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" cellspacing="30">
+                    <h:commandButton  value="Guardar cambios" action="#{sesionMB.actualizaCuenta}" />
+                    <h:commandButton   value="Cancelar"  action="inicio"/>
+                </h:panelGrid>
+                <h:panelGrid columns="6" cellspacing="30">
+                    <h:commandLink value="Inicio"  action="inicio"/>
+                    <h:commandLink value="Catalogo" action="listaTemas"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Carro"  action="carroCompra"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>
+                    <h:commandLink rendered="#{!sesionMB.logged}" value="Login"  action="login"/>
+                </h:panelGrid>
+            </h:form>
+            <br/>
+            <i>IST: tienda de libros</i>
+        </center>
+    </h:body>
+</html>

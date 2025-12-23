@@ -9,18 +9,27 @@
             <br/>
             <h:graphicImage  width="300" value="resources/images/libros.jpg" alt="libros"/>
             <br/>
-            <h1>Tienda de libros</h1>   
-            <h:outputText  rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>       
-            <br/>    
-            <br/>    
-            <br/>    
+            <h1>Tienda de libros</h1>
+            <h:outputText  rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>
+            <br/>
+            <br/>
+            <h:form>
+                <h:panelGrid columns="3" cellspacing="10">
+                    <h:outputText value="Buscar libro:"/>
+                    <h:inputText value="#{sesionMB.terminoBusqueda}" size="40"/>
+                    <h:commandButton value="Buscar" action="#{sesionMB.buscarLibros()}"/>
+                </h:panelGrid>
+            </h:form>
+            <br/>
+            <br/>
             <h2>Pedido:</h2>
-            <h:form>        
-                <h:dataTable  value="#{sesionMB.carroCompra.librosEnCarro}" cellspacing="30" var="libroEnCarro" >                   
-                    <h:column>   
+            <h:form>
+                <h:dataTable  value="#{sesionMB.carroCompra.librosEnCarro}" cellspacing="30" var="libroEnCarro" >
+
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Título"/>
-                        </f:facet>                   
+                        </f:facet>
                         <h:outputText value="#{libroEnCarro.libro.titulo}"/>
                     </h:column>
                     <h:column>
@@ -28,13 +37,13 @@
                             <h:outputText value="Autor"/>
                         </f:facet>
                         <h:outputText value="#{libroEnCarro.libro.autor}"/>
-                    </h:column>           
+                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Precio"/>
                         </f:facet>
                         <h:outputText value="#{libroEnCarro.libro.precio}"/>
-                    </h:column>            
+                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Cantidad"/>
@@ -45,34 +54,34 @@
                         <f:facet name="header">
                             <h:outputText value="SubTotal"/>
                         </f:facet>
-                        <h:outputText value="#{libroEnCarro.subTotal} euros"/>                    
-                    </h:column>            
+                        <h:outputText value="#{libroEnCarro.subTotal} euros"/>
+                    </h:column>
                     <f:facet name="footer">
                         <h:outputText value="Total: #{sesionMB.carroCompra.total} euros"/>
-                    </f:facet>                                   
-                </h:dataTable>                
-                <br/>  
+                    </f:facet>
+                </h:dataTable>
+                <br/>
                 <h:panelGrid columns="2" cellspacing="30">
-                    <h:commandButton value="Confirma" action="#{sesionMB.confirmaPedido()}"/>    
-                    <h:commandButton value="Cancela" action="carroCompra"/>    
-                </h:panelGrid> 
+                    <h:commandButton value="Confirma" action="#{sesionMB.confirmaPedido()}"/>
+                    <h:commandButton value="Cancela" action="carroCompra"/>
+                </h:panelGrid>
                 <h:panelGrid columns="3" cellspacing="30">
                     <h:graphicImage  width="100" value="resources/images/carrito.jpg" alt="carrito"/>
-                    <h:outputText   value="(#{sesionMB.carroCompra.numLibrosEnCarro} articulos)"  />   
-                    <h:commandLink   rendered="#{!sesionMB.carroCompra.vacio}" value="Ver"  action="carroCompra"/>     
+                    <h:outputText   value="(#{sesionMB.carroCompra.numLibrosEnCarro} articulos)"  />
+                    <h:commandLink   rendered="#{!sesionMB.carroCompra.vacio}" value="Ver"  action="carroCompra"/>
                 </h:panelGrid>
-                <br/>                
-                <h:panelGrid columns="5" cellspacing="30">
-                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>                                         
-                    <h:commandLink value="Catalogo" action="listaTemas"/>   
-                    <h:commandLink value="Libros de #{sesionMB.tema.nombre}" action="listaLibros"/>    
-                    <h:commandLink  value="Inicio"  action="inicio"/>   
-                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>    
-                </h:panelGrid> 
-            </h:form>            
-            <br/>       
+                <br/>
+                <h:panelGrid columns="6" cellspacing="30">
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Editar cuenta"  action="#{sesionMB.irEditarCuenta()}"/>
+                    <h:commandLink value="Catalogo" action="listaTemas"/>
+                    <h:commandLink value="Libros de #{sesionMB.tema.nombre}" action="listaLibros"/>
+                    <h:commandLink  value="Inicio"  action="inicio"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>
+                </h:panelGrid>
+            </h:form>
+            <br/>
             <i>IST: tienda de libros</i>
         </center>
     </h:body>
 </html>
-

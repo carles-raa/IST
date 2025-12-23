@@ -5,24 +5,32 @@
         <title>Lista de pedidos</title>
     </h:head>
     <h:body>
-         <center>  
+         <center>
             <br/>
             <h:graphicImage  width="300" value="resources/images/libros.jpg" alt="libros"/>
             <br/>
-            <h1>Tienda de libros</h1>   
-            <h:outputText  rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>      
-            <br/>    
-            <br/>    
-            <br/>    
-            <h2>Pedidos de #{sesionMB.cliente.nombre}:</h2>        
+            <h1>Tienda de libros</h1>
+            <h:outputText  rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>
             <br/>
-            <h:dataTable rendered="#{sesionMB.cliente.hayPedidos}" value="#{sesionMB.cliente.pedidos}" var="pedido" cellspacing="30" >     
+            <br/>
+            <h:form>
+                <h:panelGrid columns="3" cellspacing="10">
+                    <h:outputText value="Buscar libro:"/>
+                    <h:inputText value="#{sesionMB.terminoBusqueda}" size="40"/>
+                    <h:commandButton value="Buscar" action="#{sesionMB.buscarLibros()}"/>
+                </h:panelGrid>
+            </h:form>
+            <br/>
+            <br/>
+            <h2>Pedidos de #{sesionMB.cliente.nombre}:</h2>
+            <br/>
+            <h:dataTable rendered="#{sesionMB.cliente.hayPedidos}" value="#{sesionMB.cliente.pedidos}" var="pedido" cellspacing="30" >
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Importe"/>
                     </f:facet>
                     <h:outputText value="#{pedido.importe}"/>
-                </h:column>            
+                </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Fecha"/>
@@ -34,25 +42,27 @@
                         <h:outputText value="Estado"/>
                     </f:facet>
                     <h:outputText value="#{pedido.estado}"/>
-                </h:column>            
-            </h:dataTable>   
+                </h:column>
+            </h:dataTable>
             <h:outputText rendered="#{!sesionMB.cliente.hayPedidos}" value="No hay pedidos" />
             <br/>
             <h:form>
                 <h:panelGrid columns="3" cellspacing="30">
                     <h:graphicImage  width="100" value="resources/images/carrito.jpg" alt="carrito"/>
-                    <h:outputText   value="(#{sesionMB.carroCompra.numLibrosEnCarro} articulos)"  />   
-                    <h:commandLink   rendered="#{!sesionMB.carroCompra.vacio}" value="Ver"  action="carroCompra"/>     
+                    <h:outputText   value="(#{sesionMB.carroCompra.numLibrosEnCarro} articulos)"  />
+                    <h:commandLink   rendered="#{!sesionMB.carroCompra.vacio}" value="Ver"  action="carroCompra"/>
                 </h:panelGrid>
-                <h:panelGrid columns="4" cellspacing="30">                                   
-                    <h:commandLink value="Catalogo" action="listaTemas"/>      
-                    <h:commandLink   value="Inicio"  action="inicio"/> 
-                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>   
-                </h:panelGrid>   
+                <h:panelGrid columns="6" cellspacing="30">
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Editar cuenta"  action="#{sesionMB.irEditarCuenta()}"/>
+                    <h:commandLink value="Catalogo" action="listaTemas"/>
+                    <h:commandLink   value="Inicio"  action="inicio"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>
+                    <h:commandLink rendered="#{!sesionMB.logged}" value="Login"  action="login"/>
+                </h:panelGrid>
             </h:form>
             <br/>
             <i>IST: tienda de libros</i>
-         </center>  
+         </center>
     </h:body>
 </html>
-

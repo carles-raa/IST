@@ -9,11 +9,19 @@
             <br/>
             <h:graphicImage  width="300" value="resources/images/libros.jpg" alt="libros"/>
             <br/>
-            <h1>Tienda de libros</h1>              
-            <br/>    
+            <h1>Tienda de libros</h1>
+            <br/>
+            <h:form>
+                <h:panelGrid columns="3" cellspacing="10">
+                    <h:outputText value="Buscar libro:"/>
+                    <h:inputText value="#{sesionMB.terminoBusqueda}" size="40"/>
+                    <h:commandButton value="Buscar" action="#{sesionMB.buscarLibros()}"/>
+                </h:panelGrid>
+            </h:form>
+            <br/>
             <h2>Escribe el login y la palabra de paso:</h2>
-            <h:form>          
-                <h:panelGrid columns="2" cellspacing="20"> 
+            <h:form>
+                <h:panelGrid columns="2" cellspacing="20">
                     <h:outputText value="Login:" />
                     <h:inputText id="usernameInput" value="#{sesionMB.login}" />
                     <h:outputText value="Password:" />

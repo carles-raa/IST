@@ -4,38 +4,48 @@
     <h:head>
         <title>Lista de temas</title>
     </h:head>
-    <h:body> 
+    <h:body>
         <center>
             <br/>
             <h:graphicImage  width="300" value="resources/images/libros.jpg" alt="libros"/>
             <br/>
-            <h1>Tienda de libros</h1>   
-            <h:outputText   rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>        
-            <br/>    
-            <br/>    
-            <br/>    
-            <h2>Temas:</h2>    
-            <h:form>                        
+            <h1>Tienda de libros</h1>
+            <h:outputText   rendered="#{sesionMB.logged}" value="Usuario: #{sesionMB.cliente.nombre},         login en #{sesionMB.loginTime}"/>
+            <br/>
+            <br/>
+            <h:form>
+                <h:panelGrid columns="3" cellspacing="10">
+                    <h:outputText value="Buscar libro:"/>
+                    <h:inputText value="#{sesionMB.terminoBusqueda}" size="40"/>
+                    <h:commandButton value="Buscar" action="#{sesionMB.buscarLibros()}"/>
+                </h:panelGrid>
+            </h:form>
+            <br/>
+            <br/>
+            <h2>Temas:</h2>
+            <h:form>
                 <h:dataTable value="#{sesionMB.temas}" var="t" cellspacing="30">
                     <h:column>
-                        <h:commandLink  value="#{t.nombre}"  action="#{sesionMB.verTema(t)}"/>                                  
+                        <h:commandLink  value="#{t.nombre}"  action="#{sesionMB.verTema(t)}"/>
                     </h:column>
                 </h:dataTable>
-                <br/>               
+                <br/>
                 <h:panelGrid columns="3" cellspacing="30">
                     <h:graphicImage  width="100" value="resources/images/carrito.jpg" alt="carrito"/>
-                    <h:outputText   value="(#{sesionMB.carroCompra.numLibrosEnCarro} articulos)"  />   
-                    <h:commandLink   rendered="#{!sesionMB.carroCompra.vacio}" value="Ver"  action="carroCompra"/>     
+                    <h:outputText   value="(#{sesionMB.carroCompra.numLibrosEnCarro} articulos)"  />
+                    <h:commandLink   rendered="#{!sesionMB.carroCompra.vacio}" value="Ver"  action="carroCompra"/>
                 </h:panelGrid>
-                <h:panelGrid columns="3" cellspacing="30">
-                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>                         
-                    <h:commandLink   value="Inicio"  action="inicio"/>   
-                    <h:commandLink rendered="#{!sesionMB.logged}" value="Login"  action="login"/>     
-                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>                 
-                </h:panelGrid>                                          
+                <h:panelGrid columns="6" cellspacing="30">
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Ver pedidos"  action="listaPedidos"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Editar cuenta"  action="#{sesionMB.irEditarCuenta()}"/>
+                    <h:commandLink   value="Inicio"  action="inicio"/>
+                    <h:commandLink value="Catalogo" action="listaTemas"/>
+                    <h:commandLink rendered="#{sesionMB.logged}" value="Logout"  action="#{sesionMB.logout()}"/>
+                    <h:commandLink rendered="#{!sesionMB.logged}" value="Login"  action="login"/>
+                </h:panelGrid>
             </h:form>
             <br/>
             <i>IST: tienda de libros</i>
-        </center>      
+        </center>
     </h:body>
 </html>
